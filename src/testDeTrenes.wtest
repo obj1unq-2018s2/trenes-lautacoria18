@@ -1,0 +1,49 @@
+import trenes.*
+describe "chuchu"	{
+	
+	var vagonDePasajeros = new VagonDePasajeros(largoDeVagon=10, anchoDeVagon =10)
+	var vagonDePasajeros2 = new VagonDePasajeros(largoDeVagon=15, anchoDeVagon =2)
+	var vagonDePasajeros3 = new VagonDePasajeros(largoDeVagon=13, anchoDeVagon =13)
+	
+	var vagonDeCarga = new VagonDeCarga(cargaMaxima= 100)
+	var vagonDeCarga2 = new VagonDeCarga(cargaMaxima= 90)
+	var vagonDeCarga3 = new VagonDeCarga(cargaMaxima= 110)
+	
+	var locomotora = new Locomotora(peso = 1000, velocidadMaxima= 500, pesoQuePuedeArrastrar= 9000)
+	var locomotora2 = new Locomotora(peso = 2000, velocidadMaxima= 600, pesoQuePuedeArrastrar= 8000)
+	var locomotora3 = new Locomotora(peso = 3000, velocidadMaxima= 700, pesoQuePuedeArrastrar= 7000)
+	
+	var formacion1= new Formacion(trenes=[vagonDePasajeros,vagonDePasajeros2,vagonDePasajeros3,vagonDeCarga,vagonDeCarga2,vagonDeCarga3,
+		locomotora, locomotora2, locomotora3])
+	
+//	test "pasajeros"{
+		
+		//assert.equals(10, vagonDePasajeros.cantPasajeros())
+	//	assert.equals(120, vagonDePasajeros2.cantPasajeros())
+		//assert.equals(10, vagonDePasajeros3.cantPasajeros())
+//	}
+	
+	test "vagones livianos"{
+		
+		assert.equals(5, formacion1.vagonesLivianos())
+
+		
+		
+	}
+	test "velocidad maxima"{
+		
+		assert.equals(500, formacion1.velocidadMaxima())
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
