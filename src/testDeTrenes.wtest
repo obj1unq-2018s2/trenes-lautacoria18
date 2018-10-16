@@ -5,27 +5,22 @@ describe "chuchu"	{
 	var vagonDePasajeros2 = new VagonDePasajeros(largoDeVagon=15, anchoDeVagon =2)
 	var vagonDePasajeros3 = new VagonDePasajeros(largoDeVagon=13, anchoDeVagon =13)
 	
-	var vagonDeCarga = new VagonDeCarga(cargaMaxima= 100)
+	var vagonDeCarga = new VagonDeCarga(cargaMaxima= 100) 
 	var vagonDeCarga2 = new VagonDeCarga(cargaMaxima= 90)
 	var vagonDeCarga3 = new VagonDeCarga(cargaMaxima= 110)
 	
-	var locomotora = new Locomotora(peso = 1000, velocidadMaxima= 500, pesoQuePuedeArrastrar= 9000)
-	var locomotora2 = new Locomotora(peso = 2000, velocidadMaxima= 600, pesoQuePuedeArrastrar= 10000)
-	var locomotora3 = new Locomotora(peso = 3000, velocidadMaxima= 700, pesoQuePuedeArrastrar= 15000)
+	var locomotora = new Locomotora(peso = 1000, velocidadMaxima= 500, pesoMaximoQuePuedeArrastrar= 9000)
+	var locomotora2 = new Locomotora(peso = 2000, velocidadMaxima= 600, pesoMaximoQuePuedeArrastrar= 10000)
+	var locomotora3 = new Locomotora(peso = 3000, velocidadMaxima= 700, pesoMaximoQuePuedeArrastrar= 15000)
 	
-	var formacion1= new Formacion(trenes=[vagonDePasajeros,vagonDePasajeros2,vagonDePasajeros3,vagonDeCarga,vagonDeCarga2,vagonDeCarga3], locomotoras=[])
-	var formacion2=	new Formacion(locomotoras=[locomotora, locomotora2, locomotora3], trenes=[])
+	var formacion1= new Formacion(vagones=[vagonDePasajeros,vagonDePasajeros2,vagonDePasajeros3,vagonDeCarga,vagonDeCarga2,vagonDeCarga3], locomotoras=[])
+	var formacion2=	new Formacion(locomotoras=[locomotora, locomotora2, locomotora3], vagones=[])
+	var formacion3= new Formacion(locomotoras=[locomotora, locomotora2, locomotora3], vagones=[vagonDePasajeros,vagonDePasajeros2,vagonDePasajeros3,vagonDeCarga,vagonDeCarga2,vagonDeCarga3])
 	
-	
-//	test "pasajeros"{
-		
-		//assert.equals(10, vagonDePasajeros.cantPasajeros())
-	//	assert.equals(120, vagonDePasajeros2.cantPasajeros())
-		//assert.equals(10, vagonDePasajeros3.cantPasajeros())
-//	}
+
 	
 	test "vagones livianos"{
-		
+		 	
 		assert.equals(3, formacion1.vagonesLivianos())
 
 		
@@ -41,7 +36,7 @@ describe "chuchu"	{
 	
 	test "es eficiente"{
 		
-		assert.equals(true, formacion2.formacionEficiente())
+		assert.equals(false, formacion2.formacionEficiente())
 		
 	}
 	
@@ -51,6 +46,14 @@ describe "chuchu"	{
 		assert.equals(true, formacion2.formacionPuedeMoverse())
 		
 	}
+	
+		test "cuantos kilos"{
+			
+			
+			
+		assert.equals(0, formacion2.cuantosKilosFaltan())
+			
+		}
 	
 	
 	
