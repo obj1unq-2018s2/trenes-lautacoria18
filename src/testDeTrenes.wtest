@@ -1,9 +1,13 @@
 import trenes.*
+import Deposito.*
 describe "chuchu"	{
 	
 	var vagonDePasajeros = new VagonDePasajeros(largoDeVagon=10, anchoDeVagon =10)
 	var vagonDePasajeros2 = new VagonDePasajeros(largoDeVagon=15, anchoDeVagon =2)
 	var vagonDePasajeros3 = new VagonDePasajeros(largoDeVagon=13, anchoDeVagon =13)
+	var vagonDePasajeros4= new VagonDePasajeros(largoDeVagon=100, anchoDeVagon=100)
+	var vagonDePasajeros5= new VagonDePasajeros(largoDeVagon=300, anchoDeVagon=300)
+
 	
 	var vagonDeCarga = new VagonDeCarga(cargaMaxima= 100) 
 	var vagonDeCarga2 = new VagonDeCarga(cargaMaxima= 90)
@@ -12,12 +16,14 @@ describe "chuchu"	{
 	var locomotora = new Locomotora(peso = 1000, velocidadMaxima= 500, pesoMaximoQuePuedeArrastrar= 9000)
 	var locomotora2 = new Locomotora(peso = 2000, velocidadMaxima= 600, pesoMaximoQuePuedeArrastrar= 10000)
 	var locomotora3 = new Locomotora(peso = 3000, velocidadMaxima= 700, pesoMaximoQuePuedeArrastrar= 15000)
+	var locomotora4 = new Locomotora(peso = 6000, velocidadMaxima= 700, pesoMaximoQuePuedeArrastrar= 30000)
 	
-	var formacion1= new Formacion(vagones=[vagonDePasajeros,vagonDePasajeros2,vagonDePasajeros3,vagonDeCarga,vagonDeCarga2,vagonDeCarga3], locomotoras=[])
-	var formacion2=	new Formacion(locomotoras=[locomotora, locomotora2, locomotora3], vagones=[])
-	var formacion3= new Formacion(locomotoras=[locomotora, locomotora2, locomotora3], vagones=[vagonDePasajeros,vagonDePasajeros2,vagonDePasajeros3,vagonDeCarga,vagonDeCarga2,vagonDeCarga3])
+	var formacion1= new Formacion(vagones=[vagonDePasajeros4,vagonDePasajeros2,vagonDePasajeros3,vagonDeCarga,vagonDeCarga2,vagonDeCarga3], locomotoras=[])
+	var formacion2=	new Formacion(locomotoras=[locomotora, locomotora2, locomotora3], vagones=[vagonDeCarga,vagonDeCarga2,vagonDeCarga3])
+	var formacion3= new Formacion(locomotoras=[locomotora, locomotora2, locomotora3], vagones=[vagonDePasajeros,vagonDePasajeros2,vagonDePasajeros5,vagonDeCarga,vagonDeCarga2,vagonDeCarga3])
 	
-
+	var deposito1= new Deposito(formacionesArmadas=[formacion1, formacion2, formacion3], locomotorasSueltas=[locomotora4])
+	
 	
 	test "vagones livianos"{
 		 	
@@ -54,13 +60,28 @@ describe "chuchu"	{
 		assert.equals(0, formacion2.cuantosKilosFaltan())
 			
 		}
+		
+		test "vagon mas pesado"{
+		
+		assert.equals(#{vagonDePasajeros4, vagonDeCarga3, vagonDePasajeros5}, deposito1.vagonMasPesadoPorFormacion())
+
 	
+	}
 	
-	
-	
-	
-	
-	
-	
+		test "necesita conductor"{
+			
+			assert.equals(true, deposito1.necesitaConductor()) 
+			
+		}
+		
+		test "agregarLoco"{
+			
+			deposito1.agregarLocomotoraAFormacion(formacion2)
+			assert.equals(3, formacion2.locomotoras().size())
+			
+		}
+		
+		
+		
 	
 }

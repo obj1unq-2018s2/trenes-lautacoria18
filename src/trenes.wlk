@@ -1,3 +1,4 @@
+import Deposito.*
 class Locomotora{
 	
 	
@@ -51,6 +52,17 @@ class Formacion {
 	
 	method pesoTotalDeLocomotoras() {return locomotoras.sum{locomotora => locomotora.pesoMaximo()}}
 	
+	method vagonMasPesado() {return vagones.max{vagon => vagon.pesoMaximo()}}
+	
+	method cantidadDeVagonesYLocomotoras(){ return vagones.size() + locomotoras.size()}
+	
+	method esCompleja(){return self.cantidadDeVagonesYLocomotoras()> 20 or self.pesoTotalDeVagones() + self.pesoTotalDeLocomotoras() > 10000}
+	
+	method buscarLocomotora(locos){return locos.find {locomotora => locomotora.arrastreUtil() >= self.cuantosKilosFaltan()}}
+	
+	method agregarLocomotora(locos){ locomotoras.add(self.buscarLocomotora(locos))}
+	
+	
 	//Metodos de ejercicios
 	
 	method vagonesLivianos() {return vagones.count{vagon=>vagon.pesoMaximo()<2500}}
@@ -61,9 +73,13 @@ class Formacion {
 	
 	method formacionEficiente() {return locomotoras.all{tren => tren.arrastreUtil()>=tren.peso()*5}}
 	
-//	method formacionPuedeMoverse(){return locomotoras.sum{locomotora => locomotora.arrastreUtil() } >= vagones.sum{ vagon => vagon.pesoMaximo() }}
+
 	method formacionPuedeMoverse(){return self.arrastreUtilTotal() >= self.pesoTotalDeVagones()}
 	
 	method cuantosKilosFaltan() {return if (self.formacionPuedeMoverse()) 0 else self.pesoTotalDeVagones() - self.arrastreUtilTotal()}
-	
+
+
+		
 }
+
+
