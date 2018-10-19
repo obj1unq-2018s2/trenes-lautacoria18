@@ -21,8 +21,7 @@ class VagonDePasajeros {
 								
 								
 		method pesoMaximo() = self.cantPasajeros() * 80
-		
-		
+	
 
 	
 	
@@ -37,6 +36,50 @@ class VagonDeCarga {
 	method	pesoMaximo() = cargaMaxima + 160
 	
 	method esLocomotora() = false
+	
+}
+
+class FormacionConTrenesRapidos inherits Formacion {
+	
+	override method estaBienArmada() {
+		
+		return self.velocidadMaxima() > 250 and self.todosVagonesLivianos()
+	}
+	
+	
+	override method velocidadMaxima() = 400
+	
+	
+	
+	
+	
+}
+
+class FormacionDeLargaDistancia inherits Formacion {
+	
+	
+	var property uneDosCiudades
+	
+	override method estaBienArmada() {
+		
+				return super() and self.hayBanioCada50()
+	}
+		
+	override method velocidadMaxima() = if  (uneDosCiudades) 200 else 150
+	
+}
+
+class FormacionDeCortaDistancia inherits Formacion {
+	
+	override method estaBienArmada(){
+					return super() and not self.esCompleja()
+					
+	}
+	
+	override method velocidadMaxima() = 60
+		
+				
+	
 }
 
 class Formacion {
@@ -61,6 +104,14 @@ class Formacion {
 	method buscarLocomotora(locos){return locos.find {locomotora => locomotora.arrastreUtil() >= self.cuantosKilosFaltan()}}
 	
 	method agregarLocomotora(locos){ locomotoras.add(self.buscarLocomotora(locos))}
+	
+	method estaBienArmada() {return self.formacionPuedeMoverse()}
+	
+	method hayBanioCada50() {return self.cantPasajerosFormacion()/50 >= 1}
+	
+	method cantPasajerosFormacion() {return vagones.sum{vagon => vagon.cantPasajeros()}}
+	
+	method todosVagonesLivianos() {return vagones.all{vagon=>vagon.pesoMaximo()<2500}}
 	
 	
 	//Metodos de ejercicios

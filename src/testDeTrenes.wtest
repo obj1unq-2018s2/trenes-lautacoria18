@@ -81,7 +81,10 @@ describe "chuchu"	{
 			
 		}
 		
+		test "haybanio"{
+		
+		assert.that(formacion1.hayBanioCada50())
 		
 		
-	
+	}
 }
